@@ -7,11 +7,12 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
+  Button,
 } from 'react-native';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const itemsPerRow = 3;
+const itemsPerRow = 2;
 const { width: screenWidth } = Dimensions.get('screen');
 const itemWidth = (screenWidth - 20 * (itemsPerRow + 1)) / itemsPerRow;
 const itemMargin = (screenWidth - itemWidth * itemsPerRow) / (itemsPerRow * 2);
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   product: {
     width: itemWidth,
-    height: itemHeight,
+    height: itemHeight+100,
     marginRight: itemMargin,
     marginLeft: itemMargin,
     backgroundColor: 'white',
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   productImage: {
-    height: itemHeight-55,
+    height: itemHeight,
     width: '100%',
   },
   productTitle: {
@@ -103,17 +104,27 @@ const Categories = () => {
   );       
 };
 
+
+
+
 // A component to display a single product
 const Product = ({title, price, image, id}: {title: string, price: string, image: string, id: string}) => {
+  const [itemCount, setItemCount] = React.useState(0);
+
+  const handleAddToCart = () => {
+    setItemCount(itemCount + 1);
+    console.log(`Item with id ${id} added to cart. Cart count: ${itemCount + 1}`);
+  };
+
   return (
-  <View style={styles.product}>
-  <Image source={{ uri: image }} style={styles.productImage} />
-  <Text style={styles.productTitle}>{title}</Text>
-  <Text style={styles.productPrice}>{price}</Text>
-  </View>
+    <View style={styles.product}>
+      <Image source={{ uri: image }} style={styles.productImage} />
+      <Text style={styles.productTitle}>{title}</Text>
+      <Text style={styles.productPrice}>{price}</Text>
+      <Button title="Add to Cart" onPress={handleAddToCart} />
+    </View>
   );
 };
-
 
 
 // A component to display list of products
