@@ -23,6 +23,7 @@ const Ustyles = StyleSheet.create({
     headerTitle: {
       fontWeight: 'bold',
       fontSize: 24,
+      color: '#000000',
     },
     categories: {
       height: 50,
@@ -58,12 +59,14 @@ const Ustyles = StyleSheet.create({
       },
       productTitle: {
         fontWeight: 'bold',
+        color: '#000000',
         marginTop: 10,
         fontSize: 16,
       },
       productPrice: {
         marginTop: 5,
         fontSize: 14,
+        color: '#000000',
       },
 });
 export default Ustyles;

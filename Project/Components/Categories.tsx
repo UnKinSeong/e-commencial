@@ -14,7 +14,7 @@ const Categories = () => {
         products.push({
             title: 'product '+(i+1),
             price: '$40',
-            image: 'https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img-300x300.jpg',
+            image: 'https://nikecompanyblog.files.wordpress.com/2015/05/nike1.jpg',
             brand: 'Nike',
             id: ''+(i+1),
         });
@@ -23,7 +23,7 @@ const Categories = () => {
         products.push({
             title: 'product '+(i+1),
             price: '$40',
-            image: 'https://www.jaipuriaschoolpatna.in/wp-content/uploads/2016/11/blank-img-300x300.jpg',
+            image: 'https://thumbs.dreamstime.com/b/louis-vuitton-logo-popular-clothing-brand-famous-luxury-vector-icon-zaporizhzhia-ukraine-may-222305651.jpg',
             brand: 'Louis Vuitton',
             id: ''+(i+21),
         });
@@ -37,7 +37,7 @@ const Categories = () => {
         {props => <Products {...props} TTypes={"Nike"} products={products.slice(0, 20)}/>}
       </Stack.Screen>
       <Stack.Screen name="Louis Vuitton">
-        {props => <Products {...props} TTypes={"Louis Vuitton"} products={products.slice(21, 40)} />}
+        {props => <Products {...props} TTypes={"Louis Vuitton"} products={products.slice(20, 40)} />}
       </Stack.Screen>
     </Tab.Navigator>
   );
