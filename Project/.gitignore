@@ -63,4 +63,4 @@ yarn-error.log
 .metro-health-check*
 
 # Password Locations
-Project/android/gradle.properties
+./Project/android/gradle.properties
