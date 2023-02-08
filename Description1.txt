@@ -11,3 +11,5 @@ This is a React Native code that implements an e-commerce app that sells clothes
 The code also uses the 'SafeAreaView', 'View', 'Text', 'Image', 'ScrollView', 'StyleSheet', and 'Dimensions' components from the react-native library, as well as the 'NavigationContainer', 'StackActions', 'createStackNavigator' components from the '@react-navigation/native' library. The 'styles' object is used to define the styles for the various components.
 
 The 'Dimensions' component is used to get the screen width, which is then used to calculate the 'itemWidth' and 'itemMargin' constants that are used in styling the 'Product' component. The 'itemHeight' constant is calculated based on the 'itemWidth' constant.
+
+Go to ./Project/android/gradle.properties to Enter the password in order to build the released.
