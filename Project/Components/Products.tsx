@@ -3,11 +3,12 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-import { Product, Product_T } from "./Product";
+import { Product } from "./Product";
+import { IProduct } from "./Products_Type";
 
 // A component to display list of products
 
-const Products = ({TTypes, products}: {TTypes: string, products: Product_T[]}) => {
+const Products = ({TTypes, products}: {TTypes: string, products: IProduct[]}) => {
     const styles = StyleSheet.create({
         productsContainer: {
             flex: 1,

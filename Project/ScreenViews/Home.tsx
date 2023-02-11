@@ -2,18 +2,17 @@ import React from 'react';
 import {
   SafeAreaView,
 } from 'react-native';
-import Categories from '../Components/Categories';
 import Header from '../Components/Header';
 import Ustyles from '../Styles';
-
+import Categories from './Categories';
 // The Home Screen Component
 const HomeScreen = () => {
-    return (
+  return (
     <SafeAreaView style={{...Ustyles.container}}>
-      <Header />
+      <Header title={"E-Commerce App (clothes)"}/>
       <Categories />
     </SafeAreaView>
-    );
-  };
+  );
+};
 
 export default HomeScreen

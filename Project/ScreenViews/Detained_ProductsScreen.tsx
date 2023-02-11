@@ -1,14 +1,13 @@
 import React from 'react';
 import {
-  View,
   Text,
   SafeAreaView,
 } from 'react-native';
 import Header from '../Components/Header';
 import Ustyles from '../Styles';
+import { View_ } from './ScreenView_Type';
 
-
-export const CartScreen = () => {
+export function CartScreen ({Prev}: {Prev: View_.IPosition}){
   return (
       <SafeAreaView style={{...Ustyles.container}}>
           <Header title={"Cart"}/>
@@ -16,4 +15,3 @@ export const CartScreen = () => {
       </SafeAreaView>
   );
 };
-

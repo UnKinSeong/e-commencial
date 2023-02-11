@@ -1,17 +1,11 @@
 import React from "react";
-import { Button, Image, Text, View } from "react-native";
+import { Button, Image, Text, TouchableOpacity, View } from "react-native";
 import Ustyles from "../Styles";
+import { IProduct } from "./Products_Type";
 
 
-export type Product_T = {
-    title:string,
-    price:string,
-    image:string,
-    id   :string,
-    brand:string
-}
 // A component to display a single product
-export const Product = ({data} : {data: Product_T})=> {
+export const Product = ({data} : {data:IProduct})=> {
     const [itemCount, setItemCount] = React.useState(0);
     const handleAddToCart = () => {
       setItemCount(itemCount + 1);
@@ -20,9 +14,14 @@ export const Product = ({data} : {data: Product_T})=> {
   
     return (
       <View style={Ustyles.product}>
-        <Image source={{ uri: data.image }} style={Ustyles.productImage} />
-        <Text style={Ustyles.productTitle}>{data.title}</Text>
-        <Text style={Ustyles.productPrice}>{data.price}</Text>
+        <TouchableOpacity style={{backgroundColor: "lightgray", padding: 2}} onPress={()=> {
+            console.log('does not work');
+            }
+          }>
+          <Image source={{ uri: data.image }} style={Ustyles.productImage} />
+            <Text style={Ustyles.productTitle}>{data.title}</Text>
+          <Text style={Ustyles.productPrice}>{data.price}</Text>
+        </TouchableOpacity>
         <Button title="Add to Cart" onPress={handleAddToCart} />
       </View>
     );

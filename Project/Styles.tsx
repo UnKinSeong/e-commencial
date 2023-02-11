@@ -17,7 +17,7 @@ const Ustyles = StyleSheet.create({
       height: 60,
       paddingHorizontal: 16,
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
       alignItems: 'center',
     },
     headerTitle: {
