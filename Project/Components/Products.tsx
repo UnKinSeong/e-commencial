@@ -8,7 +8,7 @@ import { IProduct } from "./Products_Type";
 
 // A component to display list of products
 
-const Products = ({TTypes, products}: {TTypes: string, products: IProduct[]}) => {
+const Products = ({TTypes, products, navigation}: {TTypes: string, products: IProduct[], navigation?:any}) => {
     const styles = StyleSheet.create({
         productsContainer: {
             flex: 1,
@@ -22,12 +22,12 @@ const Products = ({TTypes, products}: {TTypes: string, products: IProduct[]}) =>
     /*
       Code for fetching
     */
-
     return (
       <ScrollView contentContainerStyle={{...styles.productsContainer, flexGrow: 1}} style={{flexDirection: 'row', flexWrap:'wrap'}}>
         {products.map((product,index) => (
           <Product
             data = { product }
+            navigation = {navigation}
             key = { index }
           />
         ))}

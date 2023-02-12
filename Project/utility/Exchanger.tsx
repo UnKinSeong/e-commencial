@@ -1,4 +1,5 @@
 import { IProduct } from "../Components/Products_Type";
+import {Product, Product_Image,Product_Catagory,Product_Inventory,User,Purchased_List,Cart,Cart_Item,Purchased_Item} from "./Data_Class"
 
 class Exchanger_ {
     private products:IProduct[] = [];
@@ -26,6 +27,9 @@ class Exchanger_ {
         return this.products;
     }
     public getProductDetail({productId, auth_se}:{ productId: number, auth_se?:string}):any{
+        return this.products.find(obj => {return obj.id === productId})
+    }
+    public getProductRecommands({productId, auth_se}:{ productId: number, auth_se?:string}):any{
         return this.products.find(obj => {return obj.id === productId})
     }
 }

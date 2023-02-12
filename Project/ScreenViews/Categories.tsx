@@ -9,20 +9,19 @@ const Stack = createStackNavigator();
 const Tab = createMaterialTopTabNavigator();
 
 // A component to display category filter
-const Categories = () => {
+export function Categories({navigation}:{navigation?:any}){
   const products = Exchanger.getInstance().getProducts();
   return(
     <Tab.Navigator>
       <Stack.Screen name="All">
-        {props => <Products {...props} TTypes={"All"} products={products.slice(0, 40)} />}
+        {props => <Products {...props} TTypes={"All"} products={products} navigation={navigation}/>}
       </Stack.Screen>
       <Stack.Screen name="Nike">
-        {props => <Products {...props} TTypes={"Nike"} products={products.slice(0, 20)}/>}
+        {props => <Products {...props} TTypes={"Nike"} products={products.filter((val)=>{return val.brand === 'Nike'})}  navigation={navigation}/>}
       </Stack.Screen>
       <Stack.Screen name="Louis Vuitton">
-        {props => <Products {...props} TTypes={"Louis Vuitton"} products={products.slice(20, 40)} />}
+        {props => <Products {...props} TTypes={"Louis Vuitton"} products={products.filter((val)=>{return val.brand === 'Louis Vuitton'})}  navigation={navigation}/>}
       </Stack.Screen>
     </Tab.Navigator>
   );
 }
-export default Categories;
