@@ -1,0 +1,42 @@
+Initization of this project:
+
+1. Create the folder which contains the project:
+----------------------------------------------------------------
+mkdir <project directory>
+cd <project directory>
+----------------------------------------------------------------
+
+2. Initization environment:
+----------------------------------------------------------------
+npm init -y
+npm install prisma typescript ts-node @types/node --save-dev
+----------------------------------------------------------------
+
+3. Init the TypeScript:
+----------------------------------------------------------------
+npx tsc --init
+----------------------------------------------------------------
+
+4. Init the the prisma:
+----------------------------------------------------------------
+//  we are using postgresql for our database in this project  //
+----------------------------------------------------------------
+npx prisma init --datasource-provider postgresql
+----------------------------------------------------------------
+
+5. Create the database:
+----------------------------------------------------------------
+// we will init the database with prisma migrate //
+----------------------------------------------------------------
+npx prisma migrate dev --name init
+----------------------------------------------------------------
+
+6. Create the schema models:
+----------------------------------------------------------------
+// we will create the schema models in the schema.prisma file //
+----------------------------------------------------------------
+
+7. Test the database:
+----------------------------------------------------------------
+// we will test the database with script.ts //
+----------------------------------------------------------------

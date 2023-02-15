@@ -1,0 +1,168 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User models //
+// Before create a user, you need to create a role //
+enum Role {
+  ADMIN
+  CUSTOMER
+  VENDOR
+}
+
+// User can have different status //
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+// Order can have many Status //
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+// Each clothines have different size //
+enum Size {
+  XS
+  S
+  M
+  L
+  XL
+  XXL
+}
+
+// There are 3 types of users: admin, user, vender //
+// For security reason, id are uuid //
+// Admin can create vender and user //
+// Vender can add products and manage orders //
+// User can add products to cart and checkout, which will create an order //
+model User {
+  id       String    @id @default(uuid())
+  name     String
+  email    String    @unique
+  password String
+  role     Role
+  Cart     Cart?
+  Product  Product[] // vender can have many products //
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Order     Order[]
+
+  status UserStatus @default(ACTIVE)
+
+  @@unique([name, email])
+  @@index([email])
+  @@index([name, email])
+}
+
+// Order model for order table //
+// Each order can have many products //
+model Order {
+  id        String      @id @default(uuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  Product   Product?    @relation(fields: [productId], references: [id])
+  productId String?
+  quantity  Int         @default(1)
+  price     Int
+  status    OrderStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId])
+  @@index([userId, productId])
+  @@index([userId, productId, status])
+}
+
+// Cart model for cart table //
+// Each cart can have many cart items, AKA Cartsession? //
+model Cart {
+  id        String     @id @default(uuid())
+  user      User       @relation(fields: [id], references: [id])
+  cartItems CartItem[] // cart can have many cart items //
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+// CartItem model for cart_item table //
+model CartItem {
+  id        String  @id @default(uuid())
+  quantity  Int     @default(1)
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+  cartId    String
+  productId String
+
+  @@unique([cartId, productId])
+}
+
+// Image model for image table //
+// Each product can have many images //
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id   String @id @default(cuid())
+  name String
+
+  ProductCategory ProductCategory[]
+}
+
+model ProductCategory {
+  id         String   @id @default(cuid())
+  product    Product  @relation(fields: [productId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
+  productId  String
+  categoryId String
+}
+
+// Product model for product table //
+// In this case the product are clothines //
+model Product {
+  id String @id @default(uuid())
+
+  name         String
+  price        Int
+  thumbnail    String
+  description  String
+  size         Size // size of the clothines //
+  color        String // color of the clothines //
+  quantity     Int // how many products are in stock //
+  quantitySold Int // how many products have been sold //
+  material     String
+
+  isOnSale Boolean // if the product is published //
+  inStock  Boolean // if the product is available //
+
+  Image           Image[]
+  CartItem        CartItem[]
+  Order           Order[]
+  Vendor          User              @relation(fields: [vendorId], references: [id])
+  vendorId        String
+  ProductCategory ProductCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name, vendorId])
+}
