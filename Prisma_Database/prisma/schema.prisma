@@ -43,6 +43,16 @@ enum Size {
   XXL
 }
 
+// Each clothines have different category //
+enum Category {
+  SHIRT
+  PANTS
+  SHOES
+  HAT
+  BAG
+  ACCESSORIES
+}
+
 // There are 3 types of users: admin, user, vender //
 // For security reason, id are uuid //
 // Admin can create vender and user //
@@ -121,21 +131,6 @@ model Image {
   updatedAt DateTime @updatedAt
 }
 
-model Category {
-  id   String @id @default(cuid())
-  name String
-
-  ProductCategory ProductCategory[]
-}
-
-model ProductCategory {
-  id         String   @id @default(cuid())
-  product    Product  @relation(fields: [productId], references: [id])
-  category   Category @relation(fields: [categoryId], references: [id])
-  productId  String
-  categoryId String
-}
-
 // Product model for product table //
 // In this case the product are clothines //
 model Product {
@@ -157,9 +152,9 @@ model Product {
   Image           Image[]
   CartItem        CartItem[]
   Order           Order[]
-  Vendor          User              @relation(fields: [vendorId], references: [id])
+  Vendor          User       @relation(fields: [vendorId], references: [id])
   vendorId        String
-  ProductCategory ProductCategory[]
+  ProductCategory Category[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
