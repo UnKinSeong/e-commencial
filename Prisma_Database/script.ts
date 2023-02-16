@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client'
+import { PrismaClient, User , Role} from '@prisma/client'
 const prisma = new PrismaClient()
 import express from "express";
 
@@ -18,7 +18,23 @@ api.get("/", async (req: any, res: { json: (arg0: User[]) => void; }) => {
   api/auth/signup
   end point for user to sign up
 */
+async function signup(req: any, res: { json: (arg0?: User | {error:string} ) => void; }) {
+  const { name, email, password } = req.body;
+  if (!name || !email || !password) {
+    return res.json({ error: "Please add all the fields" });
+  }
+  const newUser = await prisma.user.create({
+    data: {
+      name,
+      email,
+      password,
+      role: Role.CUSTOMER,
+    },
+  });
+  res.json(newUser);
+}
 
+api.post("/auth/signup", signup);
 
 
 
